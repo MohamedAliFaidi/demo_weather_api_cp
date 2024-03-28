@@ -23,11 +23,13 @@ function generateWeatherHTML(data) {
 }
 
 async function getWeatherData() {
-    document.getElementById("get").addEventListener("click", async function (e) {
+    document.getElementById("get").addEventListener("click",  function () {
         const city = document.getElementById("city").value;
         fetch(`/get-weather/${city}`)
             .then((res) => res.json())
             .then((data) => {
+                if(data.message =="city not found")
+                alert("city not found")
                 document.getElementById("weather-details").innerHTML = generateWeatherHTML(data);
             })
             .catch((err) => console.log(err));

@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+
 require("dotenv").config();
 app.use(express.static("public"));
 app.use(express.json());
@@ -10,8 +11,10 @@ app.get("/", (req, res) => {
 
 
 
+
 app.get("/get-weather/:city", async (req, res) => {
   try {
+    console.log(req.params.city)
     const weatherURL = `https://api.openweathermap.org/data/2.5/weather?q=${req.params.city}&units=metric&APPID=${process.env.API_KEY}`;
     const response = await fetch(weatherURL);
     const weatherData = await response.json();
